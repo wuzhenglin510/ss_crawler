@@ -1,0 +1,36 @@
+[2019-01-13T19:49:20.469] [INFO] server - email: ducuki@2mailnext.com
+[2019-01-13T19:49:21.801] [INFO] server - registerData: {"username":"ducuki@2mailnext.com","password":"qazwsxedc","repassword":"qazwsxedc","code":"608F32ED39B9","register_token":"XE5ZGuwEVYaChE35","_token":"pTrLuOeWZppIIAVsXy5t9AIEHEJ3XujefVmB6SLZ","aff":"","captcha":"ztt4"}
+[2019-01-13T19:49:24.312] [INFO] server - 验证码错误, 重新获取
+[2019-01-13T19:49:25.285] [INFO] server - registerData: {"username":"ducuki@2mailnext.com","password":"qazwsxedc","repassword":"qazwsxedc","code":"608F32ED39B9","register_token":"DXat8FpdB87TTZMZ","_token":"K0UpOYVuCtD9xfchObjg0Gi3JmUf0YKdo6gBTDny","aff":"","captcha":"qrj8"}
+[2019-01-13T19:49:32.185] [INFO] server - 还没有拿到注册确认邮件
+[2019-01-13T19:49:48.104] [INFO] server - 确认注册链接: https://www.ali-ss.com/active/b1858775ac7de9e3449594511d1243e0
+[2019-01-13T19:49:48.501] [INFO] server - 账号激活成功
+[2019-01-13T19:49:51.434] [INFO] server - login captcha: x4x6
+[2019-01-13T19:49:51.975] [INFO] server - 登录成功
+[2019-01-13T19:49:53.155] [INFO] server - 保存新邀请码成功
+[2019-01-13T19:49:54.512] [INFO] server - ss://Y2hhY2hhMjA6MTIzQHd3dy4xMDgwLmNsb3VkOjQ0Mw#【账号】有效期至：2019-01-15，流量剩余：1.95 GBGB
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDEwNi4xNC4xNzguNTc6NTM0MTA#【1080】上海
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHNoMDIuYXBuaWNwcm8uY246NTM0MTA#【1080】上海02
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHJ1LTAxLnlmYW4ub25saW5lOjUzNDEw#【1080】俄罗斯01
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDE3OC4xMjguODEuMTc0OjUzNDEw#【1080】新加坡01
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQGpwLTAxLmFwbmljcHJvLmNuOjUzNDEw#【1080】日本01
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQGpwLTAzLmFsaS1zcy54eXo6NTM0MTA#【1080】日本03
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDEyNS42LjY5Ljk3OjUzNDEw#【1080】日本04 NF
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHN6LmFwbmljcHJvLmNuOjUzNDEw#【1080】深圳01
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHVzLTAxLmFwbmljcHJvLmNuOjUzNDEw#【1080】美国01 CN2
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHVzLTA1LmFwbmljcHJvLmNuOjUzNDEw#【1080】美国05 CN2|NF
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHVzLTA2LmFsaS1pcC51czo1MzQxMA#【1080】美国06 CN2
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDEwMy44Ni42OC40MDo1MzQxMA#【1080】美国08 CN2|NF
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHNoMDIuYXBuaWNwcm8uY246NTM0MTA#【1080】[中转]美国08 CN2|NF
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDEwMy44Ni42OC41MTo1MzQxMA#【1080】美国09 CN2|NF
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHVzLTEyLmFsaS1pcC51czo1MzQxMA#【1080】美国12 CN2
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQHVzLTEzLmFwbmljcHJvLmNuOjUzNDEw#【1080】美国13 CN2
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQGtyLTAyLmFwbmljcHJvLmNuOjUzNDEw#【1080】韩国02 阿里云中转限速游戏
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDEwNi4xNC4xNzguNTc6NTM0MTA#【1080】[中转]韩国02 阿里云中转限速游戏
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQGhrLTAxLmFwbmljcHJvLmNuOjUzNDEw#【1080】香港01 HKT
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQGhrLTAyLmFwbmljcHJvLmNuOjUzNDEw#【1080】香港02 阿里云
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQGhrMDMuYXBuaWNwcm8uY246NTM0MTA#【1080】香港03 HKT
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDE0LjE5Mi41MC40MDo1MzQxMA#【1080】香港05 CN2
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQGhrLTA3LmFwbmljcHJvLmNuOjUzNDEw#【1080】香港07 HKBN
+ss://eGNoYWNoYTIwLWlldGYtcG9seTEzMDU6NWI1czRtQDQ3LjI0NC4xMDkuOTM6NTM0MTA#【1080】香港09 阿里云
+
