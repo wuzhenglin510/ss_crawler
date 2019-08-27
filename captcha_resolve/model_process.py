@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 
 import os
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # see issue #152
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
 import numpy as np
 np.random.seed(1337)
 import keras.backend as K
@@ -17,7 +18,7 @@ from sklearn.model_selection import train_test_split
 from PIL import Image
 
 
-# In[5]:
+# In[2]:
 
 
 captcha_chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
@@ -51,7 +52,7 @@ for fn in os.listdir('done'):
                 labels.append(text2vec(fn.split('_')[1].split('.')[0]))
 
 
-# In[6]:
+# In[3]:
 
 
 X = np.array(images)
@@ -61,14 +62,11 @@ X_train = X_train.reshape(-1, 43, 90, 1)/255.
 X_test = X_test.reshape(-1, 43, 90, 1)/255.
 
 
-# In[ ]:
+# In[8]:
 
 
 def scheduler(epoch):
-    if epoch == 10:
-        K.set_value(model.optimizer.lr, 1e-3)
-        print('set learn rate: ', 1e-3)
-    if epoch == 20:
+    if epoch == 30:
         K.set_value(model.optimizer.lr, 1e-3)
         print('set learn rate: ', 1e-3)
     if epoch == 50:
@@ -78,40 +76,37 @@ def scheduler(epoch):
 
 change_lr = LearningRateScheduler(scheduler)
 
+def check_code_equal(y_true, y_pred):
+    y_true_c = K.argmax(K.reshape(y_true, (-1, 4, 36)), axis = 2)
+    y_pred_c =K.argmax( K.reshape(y_pred, (-1, 4, 36)), axis = 2)
+    return K.equal(y_true_c, y_pred_c)
+
 model = Sequential()
 model.add(Convolution2D(filters=32, kernel_size=(3,3), padding='same', input_shape=(43, 90,1)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'))
-model.add(Convolution2D(filters=32, kernel_size=(3,3), padding='same'))
-model.add(Activation('relu'))
-model.add(Dropout(0.35))
-model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'))
 model.add(Convolution2D(filters=64, kernel_size=(3,3), padding='same'))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'))
-model.add(Convolution2D(filters=64, kernel_size=(3,3), padding='same'))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'))
-model.add(Dropout(0.35))
-model.add(Convolution2D(filters=128, kernel_size=(3,3), padding='same'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'))
 model.add(Convolution2D(filters=128, kernel_size=(3,3), padding='same'))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'))
-model.add(Dropout(0.35))
+model.add(Dropout(0.25))
+model.add(Convolution2D(filters=128, kernel_size=(3,3), padding='same'))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2,2), strides=(2,2), padding='same'))
 model.add(Flatten())
 model.add(Dense(1024))
 model.add(Activation('relu'))
 model.add(Dense(1024))
 model.add(Activation('relu'))
-model.add(Dropout(0.35))
+model.add(Dropout(0.25))
 model.add(Dense(144))
 model.add(Activation('softmax'))
-adam = Adam(lr = 1e-3)
+adam = Adam(lr = 1e-2)
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
-              metrics=['accuracy'])
+              metrics=[check_code_equal])
 print('\ntraining ------------')
 model.fit(X_train, y_train, epochs=30, batch_size=100, callbacks=[change_lr])
 print('\ntesting ------------')
@@ -120,16 +115,3 @@ print('\ntest loss: ', loss)
 print('\ntest accuracy: ', accuracy)
 
 model.save('cnn_model.h5')
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
