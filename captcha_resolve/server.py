@@ -15,7 +15,6 @@ from keras.models import Sequential
 from keras.layers import Dropout, Dense, Activation, Convolution2D, MaxPooling2D, Flatten, Dropout
 from keras.optimizers import Adam
 from keras.callbacks import LearningRateScheduler
-from sklearn.model_selection import train_test_split
 from PIL import Image
 from keras.models import load_model
 

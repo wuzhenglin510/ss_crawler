@@ -18,6 +18,9 @@ let ss_cookie = "";
 async function getNewEmail() {
     let response = await wc({
         method: 'GET',
+        headers: {
+	    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+        },
         uri: "https://temp-mail.org/zh/option/refresh/",
         resolveWithFullResponse : true
     })
@@ -34,7 +37,8 @@ async function refreshCurrentEmailAndGetAuthLinkEmain() {
             method: 'GET',
             uri: "https://temp-mail.org/zh/option/refresh/",
             headers: {
-                Cookie: mail_cookie
+                Cookie: mail_cookie,
+		"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
             },
             resolveWithFullResponse : true
         })
@@ -53,8 +57,10 @@ async function refreshCurrentEmailAndGetAuthLinkEmain() {
 async function getRegisterHtmlAndInitSSCookie() {
     let response = await wc({
         method: 'GET',
-        uri: "https://www.ali-ss.com/register",
-        proxy: "http://127.0.0.1:1080",
+	headers: {
+	},
+	proxy: "http://111.205.46.29:80",
+        uri: "https://1080.cloud/register",
         resolveWithFullResponse : true
     })
     let cookie = response.headers["set-cookie"].map(item => item.split(';')[0]).join("; ");
@@ -69,11 +75,10 @@ async function getRegisterHtmlAndInitSSCookie() {
 async function refreshCaptcha() {
     let response = await wc({
         method: 'GET',
-        uri: `https://www.ali-ss.com/captcha/default?${Math.random()}`,
+        uri: `https://1080.cloud/captcha/default?${Math.random()}`,
         headers: {
             Cookie: ss_cookie
         },
-        proxy: "http://127.0.0.1:1080",
         encoding: "base64",
         resolveWithFullResponse : true
     })
@@ -98,12 +103,11 @@ async function register(data) {
     try {
         await wc({
             method: 'POST',
-            uri: `https://www.ali-ss.com/register`,
+            uri: `https://1080.cloud/register`,
             headers: {
                 Cookie: ss_cookie
             },
             formData: data,
-            proxy: "http://127.0.0.1:1080"
         })
     } catch (err) {
         if (err.statusCode == 302) {
@@ -130,7 +134,6 @@ async function clickAuthLink(link) {
         headers: {
             Cookie: ss_cookie
         },
-        proxy: "http://127.0.0.1:1080"
     });
     if (confirmBody.indexOf("账号激活成功") != -1) {
         logger.info("账号激活成功")
@@ -140,11 +143,10 @@ async function clickAuthLink(link) {
 async function login(username, password) {
     let response = await wc({
         method: 'GET',
-        uri: 'https://www.ali-ss.com/login',
+        uri: 'https://1080.cloud/login',
         headers: {
             Cookie: ss_cookie
         },
-        proxy: "http://127.0.0.1:1080",
         resolveWithFullResponse : true
     });
     let body = cheerio.load(response.body);
@@ -157,12 +159,11 @@ async function login(username, password) {
     try {
         await wc({
             method: 'POST',
-            uri: `https://www.ali-ss.com/login`,
+            uri: `https://1080.cloud/login`,
             headers: {
                 Cookie: ss_cookie
             },
             formData: {username, password, _token, captcha},
-            proxy: "http://127.0.0.1:1080",
             resolveWithFullResponse : true
         })
     } catch (err) {
@@ -178,31 +179,28 @@ async function login(username, password) {
 async function getNewInviteCode(){
     let response = await wc({
         method: 'GET',
-        uri: 'https://www.ali-ss.com/user/invite',
+        uri: 'https://1080.cloud/user/invite',
         headers: {
             Cookie: ss_cookie
         },
-        proxy: "http://127.0.0.1:1080"
     });
     let _tokenRegex = /var _token = '(.*)'/;
     let _token = _tokenRegex.exec(response)[1];
     await wc({
         method: 'POST',
-        uri: `https://www.ali-ss.com/user/makeInvite`,
+        uri: `https://1080.cloud/user/makeInvite`,
         headers: {
             Cookie: ss_cookie
         },
         formData: {_token},
-        proxy: "http://127.0.0.1:1080",
         resolveWithFullResponse : true
     });
     let newCodeHtml = await wc({
         method: 'GET',
-        uri: 'https://www.ali-ss.com/user/invite',
+        uri: 'https://1080.cloud/user/invite',
         headers: {
             Cookie: ss_cookie
         },
-        proxy: "http://127.0.0.1:1080"
     });
     let body = cheerio.load(newCodeHtml);
     let newCode = body('body > div.page-container > div.page-content-wrapper > div > div:nth-child(2) > div.col-md-8 > div > div > div.portlet-body > div.table-scrollable.table-scrollable-borderless > table > tbody > tr:nth-child(1) > td:nth-child(2) > a').text();
@@ -212,15 +210,14 @@ async function getNewInviteCode(){
 async function getShadowsockServerInfo(){
     let response = await wc({
         method: 'GET',
-        uri: 'https://www.ali-ss.com/user',
+        uri: 'https://1080.cloud/user',
         headers: {
             Cookie: ss_cookie
         },
-        proxy: "http://127.0.0.1:1080"
     });
     let body = cheerio.load(response);
     let code = body('#mt-target-1').val().split('/s/')[1];
-    var ssurl= 'https://www.ali-ss.com/s/' + code + "_ss_url";
+    var ssurl= 'https://1080.cloud/s/' + code + "_ss_url";
     let _tokenRegex = /var _token = '(.*)'/;
     let _token = _tokenRegex.exec(response)[1];
     let serverInfoBase64 = await wc({
@@ -232,7 +229,6 @@ async function getShadowsockServerInfo(){
         data: {
             _token
         },
-        proxy: "http://127.0.0.1:1080"
     });
     return Buffer.from(serverInfoBase64, 'base64').toString();;
 }
@@ -276,13 +272,17 @@ let registerData = {};
                     repassword: 'qazwsxedc',
                     code: (await fs.readFileSync(path.join(__dirname, 'valid_invite_code')).toString()).replace('\n', '')
                 }
+		logger.info(JSON.stringify(registerData))
                 let securityData = await getRegisterHtmlAndInitSSCookie();
                 registerData.register_token = securityData.register_token;
                 registerData._token = securityData._token
                 registerData.aff = securityData.aff;
+		logger.info("获取验证码")
                 let base64Data = await refreshCaptcha();
                 await fs.writeFileSync("captcha.png", base64Data, 'base64')
+ 		logger.info("解析验证码")
                 let captcha = await resolveCaptcha(base64Data);
+		logger.info(`验证码是:${captcha}`)
                 registerData.captcha = captcha;
                 logger.info(`registerData: ${JSON.stringify(registerData)}`)
                 sleep.sleep(2)
